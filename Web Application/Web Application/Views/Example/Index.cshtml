@@ -1,0 +1,55 @@
+﻿@model Web_Application.Models.StudentInfo
+
+<div class="container" style="margin-top:3%">
+    <a href="/Student/Index" class="btn btn-info">Add New Student</a> <br /><br />
+</div>
+
+<table id="test" class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Student Name</th>
+            <th scope="col">Department</th>
+            <th scope="col">Address</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+</table>
+@section Scripts{
+
+    <script>
+        
+            
+            $(document).ready(function () {
+                var oTable;
+            oTable = $('#test').DataTable({
+                "ajax": {
+                    "url": "/example/Loadata",
+                },
+
+                "columns": [
+                    { "data": "studentId"},
+                    { "data": "studentName"},
+                    { "data": "department"},
+                    { "data": "address" },
+                    {
+                        "title": "",
+                        "render": function (data, type, row, meta) {
+                            return '<a href=/Student/Edit/' + row.studentId + ' class="btn btn-info">Edit</a>';
+                        }  
+                    },
+                    {
+                        "title": "",
+                        "render": function (data, type, row, meta) {
+                            return '<a href=/Student/Delete/' + row.studentId + ' class="btn btn-danger">Delete</a>';
+                        }
+                    }
+                ],
+            });
+        });
+
+
+    </script>
+}
+
